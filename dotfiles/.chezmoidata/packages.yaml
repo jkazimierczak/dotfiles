@@ -8,3 +8,8 @@ packages:
       - htop
       - zsh
       - jq
+    snap:
+      classic:
+        - astral-uv
+      strict:
+        - bw          # Bitwarden CLI

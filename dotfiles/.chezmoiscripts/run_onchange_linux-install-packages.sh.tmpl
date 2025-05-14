@@ -1,0 +1,22 @@
+{{ if eq .chezmoi.os "linux" -}}
+#!/bin/bash
+
+# Install apt packages
+sudo apt-get update
+sudo apt-get install -y \
+{{- range .packages.linux.apt }}
+    {{ . }} \
+{{- end }}
+
+{{ if eq .osid "linux-ubuntu" -}}
+# Install snap packages with --classic confinement
+{{- range .packages.linux.snap.classic }}
+sudo snap install {{ . }} --classic
+{{- end }}
+
+# Install snap packages with strict confinement
+{{- range .packages.linux.snap.strict }}
+sudo snap install {{ . }}
+{{- end }}
+{{- end }}
+{{- end }}
