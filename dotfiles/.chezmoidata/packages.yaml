@@ -1,0 +1,10 @@
+packages:
+  linux:
+    apt:
+      - git
+      - git-lfs
+      - tree
+      - net-tools
+      - htop
+      - zsh
+      - jq
