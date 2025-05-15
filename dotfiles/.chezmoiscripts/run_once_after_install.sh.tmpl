@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+zsh_path=$(command -v zsh)
+
+_zsh_check_installed() {
+  if [ -z "$zsh_path" ]; then
+    echo "Zsh is not installed. Please install zsh first."
+    exit 1
+  fi
+}
+
+_zsh_ensure_in_shells() {
+  if ! grep -q "$zsh_path" /etc/shells; then
+    echo "Adding zsh to /etc/shells"
+    echo "$zsh_path" | sudo tee -a /etc/shells
+  fi
+}
+
+_zsh_set_default_shell() {
+  if [ "$SHELL" != "$zsh_path" ]; then
+    echo "Changing default shell to zsh"
+    chsh -s "$zsh_path"
+  fi
+}
+
+_zsh_check_installed
+_zsh_ensure_in_shells
+_zsh_set_default_shell
