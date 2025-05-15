@@ -1,4 +1,11 @@
-{{- $email := promptStringOnce . "email" "Email address" -}}
+{{- $useSecrets := promptBoolOnce . "useSecrets" "Use secrets from Bitwarden [t/f]" -}}
+
+{{- $email := "" -}}
+{{- if $useSecrets -}}
+{{-   $email = (bitwarden "item" "email").login.username -}}
+{{- else -}}
+{{-   $email = promptStringOnce . "email" "git email address" -}}
+{{- end -}}
 
 {{- $osid := .chezmoi.os -}}
 {{- if hasKey .chezmoi.osRelease "id" -}}
@@ -7,6 +14,7 @@
 
 [data]
     email = {{ $email | quote }}
+    useSecrets = {{ $useSecrets }}
 
-    /* Constants */
+    # Constants
     osid = {{ $osid | quote }}
