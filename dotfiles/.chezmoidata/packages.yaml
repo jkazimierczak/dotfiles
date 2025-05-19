@@ -8,6 +8,7 @@ packages:
       - htop
       - zsh
       - jq
+      - unzip
     snap:
       classic:
         - astral-uv
