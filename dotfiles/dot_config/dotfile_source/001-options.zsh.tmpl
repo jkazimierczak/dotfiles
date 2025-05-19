@@ -1,0 +1,17 @@
+# Keybindings
+bindkey '^p' history-search-backward
+bindkey '^n' history-search-forward
+
+# History
+HISTFILE={{ .xdgStateDir }}/zsh/history
+HISTSIZE=100000
+SAVEHIST=${HISTSIZE}
+
+setopt appendhistory
+setopt hist_ignore_space
+
+# Completion styling
+# Match case-insensitively
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
+# Apply `ls` colors to completion
+zstyle ':completion:*' list-colors '${(s.:.)LS_COLORS}'
