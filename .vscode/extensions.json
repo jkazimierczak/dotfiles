@@ -1,7 +1,8 @@
 {
   "recommendations": [
     "jinliming2.vscode-go-template",
-    "editorconfig.editorconfig"
+    "editorconfig.editorconfig",
+    "timonwong.shellcheck"
   ],
   "unwantedRecommendations": []
 }

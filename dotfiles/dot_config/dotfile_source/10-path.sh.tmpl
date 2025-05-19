@@ -1,0 +1,14 @@
+# Build PATH
+_myPaths=(
+    "/snap/bin"
+)
+
+for _path in "${_myPaths[@]}"; do
+  if [[ -d ${_path} ]]; then
+    if ! printf "%s" "${_path}" | grep -q "${PATH}"; then
+      PATH="${_path}:${PATH}"
+    fi
+  fi
+done
+
+unset _myPaths _path

@@ -13,3 +13,4 @@ packages:
         - astral-uv
       strict:
         - bw          # Bitwarden CLI
+        - fx

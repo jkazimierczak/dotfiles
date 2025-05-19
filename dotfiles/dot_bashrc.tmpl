@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+
+# If not running interactively, don't do anything
+case $- in
+    *i*) ;;
+    *) return ;;
+esac
+[ -z "$PS1" ] && return
+
+
+# Locations containing *.sh and *.bash files to be sourced to your environment
+configFileLocations=(
+    "{{ .xdgConfigDir }}/dotfile_source"
+)
+
+for configFileLocation in "${configFileLocations[@]}"; do
+    if [ -d "${configFileLocation}" ]; then
+        while read -r configFile; do
+            # shellcheck disable=SC1090
+            source "${configFile}"
+        done < <(find "${configFileLocation}" \
+            -maxdepth 2 \
+            -type f \
+            -name '*.bash' \
+            -o -name '*.sh' \
+            | sort)
+    fi
+done
+
+
+alias sourcea='source ${HOME}/.bashrc' # Source this file to apply changes

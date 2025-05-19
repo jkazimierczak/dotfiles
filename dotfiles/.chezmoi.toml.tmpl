@@ -13,8 +13,12 @@
 {{- end -}}
 
 [data]
-    email = {{ $email | quote }}
-    useSecrets = {{ $useSecrets }}
+    email             = {{ $email | quote }}
+    useSecrets        = {{ $useSecrets }}
 
     # Constants
-    osid = {{ $osid | quote }}
+    osid              = {{ $osid | quote }}
+    xdgCacheDir       = "{{ .chezmoi.homeDir }}/.cache"
+    xdgConfigDir      = "{{ .chezmoi.homeDir }}/.config"
+    xdgDataDir        = "{{ .chezmoi.homeDir }}/.local/share"
+    xdgStateDir       = "{{ .chezmoi.homeDir }}/.local/state"
