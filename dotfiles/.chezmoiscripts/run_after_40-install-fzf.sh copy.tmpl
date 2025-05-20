@@ -1,0 +1,39 @@
+{{- if eq .chezmoi.os "linux" -}}
+#!/usr/bin/env bash
+
+{{ template "shared_script_utils.bash" . }}
+
+VERBOSE=false
+REPOSITORY="junegunn/fzf"
+
+_installOrUpdateFzf_() {
+    header "Verify fzf installation and check for updates"
+
+    VERSION=$(gh release view --repo "$REPOSITORY" --json tagName --jq .tagName)
+    VLESS_VERSION=$(echo "$VERSION" | sed 's/v//g')
+
+    if [[ $(command -v fzf) ]]; then
+        CURRENT_VERSION=$(fzf --version | awk '{print $1}')
+
+        if [[ "$CURRENT_VERSION" == "$VLESS_VERSION" ]]; then
+            info "fzf is up to date"
+            _safeExit_ 0
+        fi
+    fi
+
+    _makeTempDir_ "$(basename "$0")"
+    pushd "${TMP_DIR}" &>/dev/null || exit
+
+    gh release download \
+      --repo "$REPOSITORY" "$VERSION" \
+      --pattern "fzf-${VLESS_VERSION}-linux_amd64.tar.gz"
+
+    tar -xzf "fzf-${VLESS_VERSION}-linux_amd64.tar.gz"
+    mv fzf "${HOME}/bin/fzf"
+
+    popd &>/dev/null || exit
+}
+
+_installOrUpdateFzf_
+_safeExit_ 0
+{{ end }}
