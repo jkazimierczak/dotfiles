@@ -9,6 +9,7 @@ packages:
       - zsh
       - jq
       - unzip
+      - wget
     snap:
       classic:
         - astral-uv

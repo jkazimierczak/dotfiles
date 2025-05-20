@@ -1,0 +1,4 @@
+{{ if .useSecrets -}}
+# GitHub CLI Personal Access Token
+export GH_TOKEN="{{ (bitwarden "item" "gh_token").login.password }}"
+{{ end -}}
