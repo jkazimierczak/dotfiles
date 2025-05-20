@@ -1,0 +1,36 @@
+# ------ History --------
+
+# Save multi-line commands as one command
+shopt -s cmdhist
+
+# Append to the history file, don't overwrite it
+shopt -s histappend
+
+# Give history timestamps.
+export HISTTIMEFORMAT="[%F %T] "
+
+# Modify history size & location
+export HISTSIZE=100000
+export HISTFILESIZE=100000
+export HISTFILE={{ .xdgStateDir }}/bash/history
+
+# Avoid duplicate entries
+HISTCONTROL="ignorespace"
+
+# Don't record some commands
+export HISTIGNORE="&:[ ]*:exit:bg:fg:history:clear"
+
+# Enable incremental history search with up/down arrows (also Readline goodness)
+# Learn more about this here: http://codeinthehole.com/writing/the-most-important-command-line-tip-incremental-history-searching-with-inputrc/
+bind '"\e[A": history-search-backward'
+bind '"\e[B": history-search-forward'
+bind '"\e[C": forward-char'
+bind '"\e[D": backward-char'
+
+eval "$(fzf --bash)"
+
+
+# ------ Smarter tab-copletion --------
+
+bind "set completion-ignore-case on"    # Perform file completion in a case insensitive fashion
+bind "set completion-map-case on"       # Perform command completion in a case insensitive fashion
