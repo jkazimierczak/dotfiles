@@ -1,8 +1,6 @@
 #!/usr/bin/env bash
 
-omp=$(command -v oh-my-posh)
-
-if [ -z "$omp" ]; then
+if [[ ! $(command -v oh-my-posh) ]]; then
   echo "Installing Oh My Posh..."
   curl -s https://ohmyposh.dev/install.sh | bash -s >/dev/null 2>&1
 fi
