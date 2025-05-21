@@ -1,0 +1,69 @@
+"$schema" = "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json"
+
+version = 3
+final_space = true
+
+[palette]
+  node_green = '#66cc33'
+
+[[blocks]]
+  type = 'prompt'
+  alignment = 'left'
+
+  [[blocks.segments]]
+    template = '{{ .Path }} '
+    foreground = '#15C2CB'
+    type = 'path'
+    style = 'plain'
+
+    [blocks.segments.properties]
+      style = 'full'
+
+  [[blocks.segments]]
+    template = '<#F3EFF5>on</> {{ .HEAD }}{{if .BranchStatus }} {{ .BranchStatus }}{{ end }}{{ if .Working.Changed }}  {{ .Working.String }}{{ end }}{{ if and (.Working.Changed) (.Staging.Changed) }} |{{ end }}{{ if .Staging.Changed }}  {{ .Staging.String }}{{ end }} '
+    foreground = '#F141A8'
+    type = 'git'
+    style = 'plain'
+
+    [blocks.segments.properties]
+      branch_icon = ' '
+
+
+[[blocks]]
+  type = "prompt"
+  alignment = "right"
+
+  [[blocks.segments]]
+    type = "executiontime"
+    style = "plain"
+    foreground = 'yellow'
+    background = 'transparent'
+    template = '󰔛 {{ .FormattedMs }} '
+
+    [blocks.segments.properties]
+      threshold = 3000
+
+  # Languages
+  [[blocks.segments]]
+    type = 'node'
+    style = 'plain'
+    foreground = 'p:node_green'
+    template = ' {{- .Full -}}'
+
+    [blocks.segments.properties]
+      fetch_version = true
+
+
+[[blocks]]
+  type = 'prompt'
+  alignment = 'left'
+  newline = true
+
+  [[blocks.segments]]
+    type = "status"
+    style = 'plain'
+    foreground_templates = [ "{{ if gt .Code 0 }}red{{ else }}green{{ end }}" ]
+    template = '❯'
+
+    [blocks.segments.properties]
+      always_enabled = true

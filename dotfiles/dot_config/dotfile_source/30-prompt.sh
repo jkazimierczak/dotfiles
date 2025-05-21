@@ -8,7 +8,7 @@ fi
 # Use shell specific variables instead of $SHELL
 # as $SHELL indicates the login shell, not the current shell
 if [ -n "$ZSH_VERSION" ]; then
-  eval "$(oh-my-posh init zsh)"
+  eval "$(oh-my-posh init zsh --config ~/.config/oh-my-posh/config.toml)"
 elif [ -n "$BASH_VERSION" ]; then
-  eval "$(oh-my-posh init bash)"
+  eval "$(oh-my-posh init bash --config ~/.config/oh-my-posh/config.toml)"
 fi
