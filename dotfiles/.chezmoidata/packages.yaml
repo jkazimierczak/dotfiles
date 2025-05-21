@@ -12,7 +12,6 @@ packages:
       - wget
     snap:
       classic:
-        - astral-uv
       strict:
         - bw          # Bitwarden CLI
         - fx

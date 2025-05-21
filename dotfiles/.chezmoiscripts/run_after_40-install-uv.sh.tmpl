@@ -1,0 +1,39 @@
+{{- if eq .chezmoi.os "linux" -}}
+#!/usr/bin/env bash
+
+{{ template "shared_script_utils.bash" . }}
+
+VERBOSE=false
+REPOSITORY="astral-sh/uv"
+
+_installOrUpdateUv_() {
+    header "Verify uv installation and check for updates"
+
+    VERSION=$(gh release view --repo "$REPOSITORY" --json tagName --jq .tagName)
+    VLESS_VERSION=$(echo "$VERSION" | sed 's/v//g')
+
+    if [[ $(command -v uv) ]]; then
+        CURRENT_VERSION=$(uv --version | awk '{print $2}')
+
+        if [[ "$CURRENT_VERSION" == "$VLESS_VERSION" ]]; then
+            info "uv is up to date"
+            _safeExit_ 0
+        fi
+    fi
+
+    _makeTempDir_ "$(basename "$0")"
+    pushd "${TMP_DIR}" &>/dev/null || exit
+
+    gh release download \
+      --repo "$REPOSITORY" "$VERSION" \
+      --pattern "uv-x86_64-unknown-linux-gnu.tar.gz"
+
+    tar -xzf "uv-x86_64-unknown-linux-gnu.tar.gz" --strip-components=1
+    mv uv* "${HOME}/bin"
+
+    popd &>/dev/null || exit
+}
+
+_installOrUpdateUv_
+_safeExit_ 0
+{{ end }}
