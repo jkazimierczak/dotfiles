@@ -13,5 +13,4 @@ packages:
     snap:
       classic:
       strict:
-        - bw          # Bitwarden CLI
         - fx

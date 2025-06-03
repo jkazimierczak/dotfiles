@@ -8,5 +8,5 @@ export EDITOR="$(command -v nano)"
 
 {{ if .useSecrets -}}
 # GitHub CLI Personal Access Token
-export GH_TOKEN="{{ (bitwarden "item" "gh_token").login.password }}"
+export GH_TOKEN="{{ (rbw "gh_token").data.password }}"
 {{ end -}}

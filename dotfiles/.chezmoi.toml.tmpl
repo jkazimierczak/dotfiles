@@ -2,7 +2,7 @@
 
 {{- $email := "" -}}
 {{- if $useSecrets -}}
-{{-   $email = (bitwarden "item" "email").login.username -}}
+{{-   $email = (rbw "email").data.username -}}
 {{- else -}}
 {{-   $email = promptStringOnce . "email" "git email address" -}}
 {{- end -}}
