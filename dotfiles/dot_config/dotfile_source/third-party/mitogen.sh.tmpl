@@ -19,6 +19,11 @@ mitogen-on() {
   local ANSIBLE_CFG="$HOME/ansible.cfg"
   local STATE_FILE="$XDG_CONFIG_HOME/ansible-mitogen/state.sh"
 
+  if [ -f "$ANSIBLE_CFG" ] && grep -q '^strategy =' "$ANSIBLE_CFG"; then
+    echo "ansible-mitogen is already enabled."
+    return 0
+  fi
+
   if [ -f "$ANSIBLE_CFG" ]; then
     sed -i 's/# strategy =/strategy =/g' "$ANSIBLE_CFG"
   fi
@@ -32,6 +37,11 @@ mitogen-on() {
 mitogen-off() {
   local ANSIBLE_CFG="$HOME/ansible.cfg"
   local STATE_FILE="$XDG_CONFIG_HOME/ansible-mitogen/state.sh"
+
+  if [ -f "$ANSIBLE_CFG" ] && ! grep -q '^strategy =' "$ANSIBLE_CFG"; then
+    echo "ansible-mitogen is already disabled."
+    return 0
+  fi
 
   if [ -f "$ANSIBLE_CFG" ]; then
     sed -i 's/strategy =/# strategy =/' "$ANSIBLE_CFG"
