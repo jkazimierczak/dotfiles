@@ -1,5 +1,5 @@
 mitogen-status() {
-  local ANSIBLE_CFG="$HOME/ansible.cfg"
+  local ANSIBLE_CFG="$HOME/.ansible.cfg"
 
   if [ ! -f "$ANSIBLE_CFG" ]; then
     echo "Ansible configuration file not found: $ANSIBLE_CFG"
@@ -16,7 +16,7 @@ mitogen-status() {
 }
 
 mitogen-on() {
-  local ANSIBLE_CFG="$HOME/ansible.cfg"
+  local ANSIBLE_CFG="$HOME/.ansible.cfg"
   local STATE_FILE="$XDG_CONFIG_HOME/ansible-mitogen/state.sh"
 
   if [ -f "$ANSIBLE_CFG" ] && grep -q '^strategy =' "$ANSIBLE_CFG"; then
@@ -35,7 +35,7 @@ mitogen-on() {
 }
 
 mitogen-off() {
-  local ANSIBLE_CFG="$HOME/ansible.cfg"
+  local ANSIBLE_CFG="$HOME/.ansible.cfg"
   local STATE_FILE="$XDG_CONFIG_HOME/ansible-mitogen/state.sh"
 
   if [ -f "$ANSIBLE_CFG" ] && ! grep -q '^strategy =' "$ANSIBLE_CFG"; then
