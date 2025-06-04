@@ -1,0 +1,8 @@
+[defaults]
+ansible_python_interpreter = {{ .chezmoi.homeDir }}/tools/ansible-env/.venv/bin/python
+
+stdout_callback = debug
+host_key_checking = False
+
+strategy_plugins = {{ .chezmoi.homeDir }}/tools/ansible-env/.venv/lib/python3.12/site-packages/ansible_mitogen/plugins/strategy
+strategy = mitogen_linear

@@ -1,0 +1,11 @@
+[project]
+name = "ansible-venv"
+version = "0.1.0"
+description = "Local Ansible Environment"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "ansible>=11.5.0",
+    "argcomplete>=3.6.2",
+    "mitogen>=0.3.23",
+]

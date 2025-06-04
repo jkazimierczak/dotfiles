@@ -1,0 +1,27 @@
+{{- if .isDevMachine -}}
+#!/usr/bin/env bash
+
+{{ template "shared_script_utils.bash" . }}
+
+_installOrUpdate() {
+  header "Verify Ansible installation"
+
+  if [[ ! -d "${HOME}/tools/ansible" ]]; then
+    error "Ansible tools directory does not exist"
+    _safeExit_ 1
+  fi
+
+  pushd "${HOME}/tools/ansible" &>/dev/null || exit
+  uv sync
+
+  if [[ $? -ne 0 ]]; then
+    error "Failed to uv sync Ansible venv"
+    _safeExit_ 1
+  fi
+
+  popd &>/dev/null || exit
+}
+
+_installOrUpdate
+_safeExit_ 0
+{{ end }}
