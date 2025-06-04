@@ -10,6 +10,8 @@ packages:
       - jq
       - unzip
       - wget
+      # Required by Ansible
+      - sshpass
     snap:
       classic:
       strict:
