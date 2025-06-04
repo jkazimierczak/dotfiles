@@ -43,7 +43,7 @@ final_space = true
     [blocks.segments.properties]
       threshold = 3000
 
-  # Languages
+  # Languages / tools
   [[blocks.segments]]
     type = 'node'
     style = 'plain'
@@ -52,6 +52,24 @@ final_space = true
 
     [blocks.segments.properties]
       fetch_version = true
+
+  [[blocks.segments]]
+    type = 'text'
+    style = 'plain'
+    foreground = 'blue'
+    template = '{{ if eq .Env.ANSIBLE_MITOGEN "1" }} {{ end }}'
+    include_folders = [
+      "*/ansible/*"
+    ]
+
+  [[blocks.segments]]
+    type = 'text'
+    style = 'plain'
+    foreground = 'white'
+    template = ' '
+    include_folders = [
+      "*/ansible/*"
+    ]
 
 
 [[blocks]]
