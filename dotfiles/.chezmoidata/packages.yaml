@@ -12,6 +12,8 @@ packages:
       - wget
       # Required by Ansible
       - sshpass
+      # Require adding APT sources
+      - terraform
     snap:
       classic:
       strict:
