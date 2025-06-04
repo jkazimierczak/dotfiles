@@ -11,6 +11,7 @@ esac
 # Locations containing *.sh and *.bash files to be sourced to your environment
 configFileLocations=(
     "{{ .xdgConfigDir }}/dotfile_source"
+    "{{ .xdgConfigDir }}/ansible-mitogen"
 )
 
 for configFileLocation in "${configFileLocations[@]}"; do
@@ -19,13 +20,12 @@ for configFileLocation in "${configFileLocations[@]}"; do
             # shellcheck disable=SC1090
             source "${configFile}"
         done < <(find "${configFileLocation}" \
-            -maxdepth 2 \
+            -maxdepth 3 \
             -type f \
             -name '*.bash' \
             -o -name '*.sh' \
             | sort)
     fi
 done
-
 
 alias sourcea='source ${HOME}/.bashrc' # Source this file to apply changes

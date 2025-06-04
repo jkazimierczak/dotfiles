@@ -5,4 +5,8 @@ stdout_callback = debug
 host_key_checking = False
 
 strategy_plugins = {{ .chezmoi.homeDir }}/tools/ansible-env/.venv/lib/python3.12/site-packages/ansible_mitogen/plugins/strategy
+{{ if eq (env "ANSIBLE_MITOGEN") "1" -}}
 strategy = mitogen_linear
+{{- else -}}
+# strategy = mitogen_linear
+{{ end }}

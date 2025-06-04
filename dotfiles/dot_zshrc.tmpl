@@ -68,6 +68,7 @@ compinit -d "{{ .xdgCacheDir }}/zsh/zcompdump-${ZSH_VERSION}"
 # Files containing files *.zsh or *.sh to be sourced to your environment
 configFileLocations=(
     "{{ .xdgConfigDir }}/dotfile_source"
+    "{{ .xdgConfigDir }}/ansible-mitogen"
 )
 
 for configFileLocation in "${configFileLocations[@]}"; do
@@ -75,7 +76,7 @@ for configFileLocation in "${configFileLocations[@]}"; do
         while read -r configFile; do
             source "${configFile}"
         done < <(find "${configFileLocation}" \
-            -maxdepth 2 \
+            -maxdepth 3 \
             -type f \
             -name '*.zsh' \
             -o -name '*.sh' | sort)
