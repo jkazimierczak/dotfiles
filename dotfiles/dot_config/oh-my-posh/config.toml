@@ -71,6 +71,12 @@ final_space = true
       "*/ansible/*"
     ]
 
+  [[blocks.segments]]
+    type = 'terraform'
+    style = 'plain'
+    foreground = 'p:terraform_purple'
+    template = ' {{ .WorkspaceName }}'
+
 
 [[blocks]]
   type = 'prompt'
