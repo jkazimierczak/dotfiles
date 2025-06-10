@@ -1,0 +1,38 @@
+{{- if eq .chezmoi.os "linux" -}}
+#!/usr/bin/env bash
+
+{{ template "shared_script_utils.bash" . }}
+
+VERBOSE=false
+REPOSITORY="getsops/sops"
+
+_installOrUpdateSops_() {
+    header "Verify sops installation and check for updates"
+
+    VERSION=$(gh release view --repo "$REPOSITORY" --json tagName --jq .tagName)
+    VLESS_VERSION=$(echo "$VERSION" | sed 's/v//g')
+
+    if [[ $(command -v sops) ]]; then
+        CURRENT_VERSION=$(sops --version | grep -Po '\d{1,2}\.\d{1,2}\.\d{1,2}')
+
+        if [[ "$CURRENT_VERSION" == "$VLESS_VERSION" ]]; then
+            info "sops is up to date"
+            _safeExit_ 0
+        fi
+    fi
+
+    _makeTempDir_ "$(basename "$0")"
+    pushd "${TMP_DIR}" &>/dev/null || exit
+
+    gh release download \
+      --repo "$REPOSITORY" "$VERSION" \
+      --pattern "sops_${VLESS_VERSION}_amd64.deb"
+
+    sudo dpkg -i "sops_${VLESS_VERSION}_amd64.deb"
+
+    popd &>/dev/null || exit
+}
+
+_installOrUpdateSops_
+_safeExit_ 0
+{{ end }}
