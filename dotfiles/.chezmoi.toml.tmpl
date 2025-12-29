@@ -1,5 +1,4 @@
 {{- $useSecrets := promptBoolOnce . "useSecrets" "Use secrets from Bitwarden [t/f]" -}}
-{{- $isDevMachine := promptBoolOnce . "isDevMachine" "Is this a development/management machine [t/f]" -}}
 
 {{- $email := "" -}}
 {{- if $useSecrets -}}
@@ -16,7 +15,8 @@
 [data]
     email             = {{ $email | quote }}
     useSecrets        = {{ $useSecrets }}
-    isDevMachine      = {{ $isDevMachine }}
+    prompt            = "starship"
+    # prompt            = "oh-my-posh"
 
     # Constants
     osid              = {{ $osid | quote }}

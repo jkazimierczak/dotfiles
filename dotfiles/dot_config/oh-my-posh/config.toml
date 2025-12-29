@@ -11,7 +11,7 @@ final_space = true
   alignment = 'left'
 
   [[blocks.segments]]
-    template = '{{ .Path }} '
+    template = '<b>{{ .Path }}</b> '
     foreground = '#15C2CB'
     type = 'path'
     style = 'plain'
@@ -20,13 +20,17 @@ final_space = true
       style = 'full'
 
   [[blocks.segments]]
-    template = '<#F3EFF5>on</> {{ .HEAD }}{{if .BranchStatus }} {{ .BranchStatus }}{{ end }}{{ if .Working.Changed }}  {{ .Working.String }}{{ end }}{{ if and (.Working.Changed) (.Staging.Changed) }} |{{ end }}{{ if .Staging.Changed }}  {{ .Staging.String }}{{ end }} '
+    # template = '<#F3EFF5>on</> <b>{{ .HEAD }}</b>{{if .BranchStatus }} {{ .BranchStatus }}{{ end }}{{ if .Working.Changed }}  {{ .Working.String }}{{ end }}{{ if and (.Working.Changed) (.Staging.Changed) }} |{{ end }}{{ if .Staging.Changed }}  {{ .Staging.String }}{{ end }} '
+    template = "<#F3EFF5>on</> {{ .UpstreamIcon }}<b>{{ .HEAD }}</b>{{if .BranchStatus }} {{ .BranchStatus }}{{ end }}{{ if .Working.Changed }}  {{ .Working.String }}{{ end }}{{ if and (.Working.Changed) (.Staging.Changed) }} |{{ end }}{{ if .Staging.Changed }}  {{ .Staging.String }}{{ end }}{{ if gt .StashCount 0 }}  {{ .StashCount }}{{ end }}"
     foreground = '#F141A8'
     type = 'git'
     style = 'plain'
 
     [blocks.segments.properties]
-      branch_icon = ' '
+      # branch_icon = ' '
+      fetch_status = true
+      fetch_upstream_icon = true
+      fetch_worktree_count = true
 
 
 [[blocks]]
@@ -87,7 +91,7 @@ final_space = true
     type = "status"
     style = 'plain'
     foreground_templates = [ "{{ if gt .Code 0 }}red{{ else }}green{{ end }}" ]
-    template = '❯'
+    template = '<b>❯</b>'
 
     [blocks.segments.properties]
       always_enabled = true
