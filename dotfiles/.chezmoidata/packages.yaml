@@ -4,16 +4,18 @@ packages:
       - git
       - git-lfs
       - tree
-      - net-tools
+      - net-tools # netstat
       - dnsutils # dig
       - htop
       - zsh
       - jq
       - unzip
       - wget
+      - ncdu
       # Required by Ansible
       - sshpass
-      # Require adding APT sources
+      # Requires adding APT sources
+      - vault
       - terraform
     snap:
       classic:

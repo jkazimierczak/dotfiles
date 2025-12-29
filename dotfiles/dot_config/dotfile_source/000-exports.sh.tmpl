@@ -5,8 +5,3 @@ export XDG_STATE_HOME="$HOME/.local/state"
 export XDG_RUNTIME_DIR="$HOME/.local/run"
 
 export EDITOR="$(command -v nano)"
-
-{{ if .useSecrets -}}
-# GitHub CLI Personal Access Token
-export GH_TOKEN="{{ (rbw "gh_token").data.password }}"
-{{ end -}}
