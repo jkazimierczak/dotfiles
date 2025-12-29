@@ -1,4 +1,3 @@
-{{- if eq .chezmoi.os "linux" -}}
 #!/usr/bin/env bash
 
 {{ template "shared_script_utils.bash" . }}
@@ -41,4 +40,3 @@ __addTerraformAptRepo() {
 
 __addTerraformAptRepo
 _safeExit_
-{{ end }}

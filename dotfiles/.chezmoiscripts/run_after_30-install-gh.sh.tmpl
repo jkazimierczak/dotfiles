@@ -1,4 +1,3 @@
-{{- if eq .chezmoi.os "linux" -}}
 #!/usr/bin/env bash
 
 {{ template "shared_script_utils.bash" . }}
@@ -28,4 +27,3 @@ _installGhCli_() {
 
 _installGhCli_
 _safeExit_
-{{ end }}

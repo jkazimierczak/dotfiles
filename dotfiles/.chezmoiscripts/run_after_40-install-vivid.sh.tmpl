@@ -7,14 +7,14 @@ VERBOSE=false
 
 _postInstall_() {
     local version="$1"
-    sudo dpkg -i "sops_${version}_amd64.deb"
+    sudo dpkg -i "vivid_${version}_amd64.deb"
 }
 
 _installFromGitHubRelease_ \
-    "getsops/sops" \
-    "sops" \
-    "sops_\${vless_version}_amd64.deb" \
-    "sops --version | grep -Po '\d{1,2}\.\d{1,2}\.\d{1,2}'" \
+    "sharkdp/vivid" \
+    "vivid" \
+    "vivid_\${vless_version}_amd64.deb" \
+    "vivid --version | awk '{print \$2}'" \
     "_postInstall_"
 
 _safeExit_ 0

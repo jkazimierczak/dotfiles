@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+
+{{ template "shared_script_utils.bash" . }}
+{{ template "lib_github_release_installer.bash" . }}
+
+VERBOSE=false
+
+_postInstall_() {
+    local version="$1"
+    tar -xzf "lazydocker_${version}_Linux_x86_64.tar.gz"
+    mv lazydocker "${HOME}/bin/lazydocker"
+    chmod +x "${HOME}/bin/lazydocker"
+}
+
+_installFromGitHubRelease_ \
+    "jesseduffield/lazydocker" \
+    "lazydocker" \
+    "lazydocker_\${vless_version}_Linux_x86_64.tar.gz" \
+    "lazydocker --version | grep Version | grep -Po '\d{1,2}\.\d{1,2}\.\d{1,2}'" \
+    "_postInstall_"
+
+_safeExit_ 0
