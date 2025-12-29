@@ -1,27 +1,34 @@
-{{- if .isDevMachine -}}
 #!/usr/bin/env bash
 
 {{ template "shared_script_utils.bash" . }}
 
 _installOrUpdate() {
-  header "Verify Ansible installation"
+  ansible_version=$1
 
-  if [[ ! -d "${HOME}/tools/ansible" ]]; then
-    error "Ansible tools directory does not exist"
+  if [[ ! -d "${HOME}/tools/${ansible_version}" ]]; then
+    error "Ansible not found, installing Ansible"
     _safeExit_ 1
   fi
 
-  pushd "${HOME}/tools/ansible" &>/dev/null || exit
+  pushd "${HOME}/tools/${ansible_version}" &>/dev/null || exit
   uv sync
 
+  success "${ansible_version} installed successfully"
+
   if [[ $? -ne 0 ]]; then
-    error "Failed to uv sync Ansible venv"
+    error "Failed to uv sync Ansible venv in ${ansible_version}"
     _safeExit_ 1
   fi
 
   popd &>/dev/null || exit
 }
 
-_installOrUpdate
+_setupAnsible() {
+  header "Verify Ansible installation"
+
+  _installOrUpdate "ansible-latest"
+  _installOrUpdate "ansible-2.9"
+}
+
+_setupAnsible
 _safeExit_ 0
-{{ end }}
