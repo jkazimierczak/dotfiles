@@ -1,0 +1,20 @@
+# shellcheck shell=bash
+
+alias path='echo -e ${PATH//:/\\n}'
+alias fpath='echo -e ${FPATH//:/\\n}'
+
+alias ls='ls --color=auto'
+alias ll='ls -AlFhpv'
+alias la='ls -A'
+
+alias grep='grep --color=auto'
+
+alias cp='cp -iv'
+
+alias mv='mv -iv'
+
+alias chap='chezmoi apply'
+
+# TODO: Check if ansible is installed (in home/bin)
+alias gotoAnsibleVenv='cd ~/tools/ansible-latest'
+alias agi='ansible-galaxy install -r requirements.yml -p roles'
