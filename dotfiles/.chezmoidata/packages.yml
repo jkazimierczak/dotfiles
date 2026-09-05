@@ -4,7 +4,10 @@ packages:
       - wget
       - git
       - zsh
-      # - curl
-      # - bzip2
-      # - unzip
+      - curl
+      - bzip2
+      - unzip
       - tree
+      - ncdu
+      - dnsutils # dig
+      - net-tools # netstat
