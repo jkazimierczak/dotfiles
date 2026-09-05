@@ -1,0 +1,6 @@
+[tools]
+chezmoi = "2.72.1"
+fzf = "0.74.3"
+git-lfs = "3.8.0"
+terraform = "1.16.1"
+uv = "0.12.10"

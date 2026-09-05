@@ -1,0 +1,24 @@
+# Build PATH
+_myPaths=(
+    "${HOME}/bin"
+    "${HOME}/.local/bin"
+    "/snap/bin"
+)
+
+for _path in "${_myPaths[@]}"; do
+  if [[ -d ${_path} ]]; then
+    # Avoid duplicates on re-sourcing shell's rc file
+    if [[ ":${PATH}" != *":${_path}:"* ]]; then
+      PATH="${_path}:${PATH}"
+    fi
+  fi
+done
+
+print_path() {
+  local IFS=':'
+  for _dir in ${PATH}; do
+    printf "%s\n" "${_dir}"
+  done
+}
+
+unset _myPaths _path

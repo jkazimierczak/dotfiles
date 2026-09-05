@@ -1,0 +1,11 @@
+{
+  "workbench.tree.indent": 24,
+  "files.autoSave": "onWindowChange",
+  "files.associations": {
+    "*sh.tmpl": "shellscript",
+    "*.cfg.tmpl": "ini",
+  },
+  "[toml]": {
+    "editor.formatOnSave": false
+  }
+}

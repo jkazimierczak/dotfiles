@@ -1,0 +1,10 @@
+packages:
+  linux:
+    apt:
+      - wget
+      - git
+      # - curl
+      # - bzip2
+      # - unzip
+      # - tree
+      # - zsh

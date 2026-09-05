@@ -1,0 +1,18 @@
+{{- $gitUsername := promptStringOnce . "gitUsername" "Git username, eg.: john.doe" -}}
+{{- $gitEmail := promptStringOnce . "gitEmail" "Git email address, eg.: john.doe@workplace.com" -}}
+
+{{- $osid := .chezmoi.os -}}
+{{- if hasKey .chezmoi.osRelease "id" -}}
+{{-   $osid = printf "%s-%s" .chezmoi.os .chezmoi.osRelease.id -}}
+{{- end -}}
+
+[data]
+  gitUsername   = {{ $gitUsername | quote }}
+  gitEmail      = {{ $gitEmail | quote }}
+
+  # Constants
+  osid              = {{ $osid | quote }}
+  xdgCacheDir       = "{{ .chezmoi.homeDir }}/.cache"
+  xdgConfigDir      = "{{ .chezmoi.homeDir }}/.config"
+  xdgDataDir        = "{{ .chezmoi.homeDir }}/.local/share"
+  xdgStateDir       = "{{ .chezmoi.homeDir }}/.local/state"

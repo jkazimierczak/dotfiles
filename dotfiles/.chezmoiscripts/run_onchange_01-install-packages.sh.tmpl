@@ -1,0 +1,33 @@
+{{- if eq .chezmoi.os "linux" -}}
+#!/bin/bash
+
+set -euo pipefail
+
+packages=(
+{{- range .packages.linux.apt }}
+  {{- if kindIs "map" . }}
+    {{- if or (not (hasKey . "work")) (eq .work false) (and (hasKey . "work") (eq .work $.work)) }}
+      "{{ .name }}"
+    {{- end }}
+  {{- else }}
+    "{{ . }}"
+  {{- end }}
+{{- end }}
+)
+
+packages_to_install=()
+for pkg in "${packages[@]}"; do
+  if ! dpkg -s "$pkg" >/dev/null 2>&1; then
+    packages_to_install+=("$pkg")
+  fi
+done
+
+if [ ${#packages_to_install[@]} -gt 0 ]; then
+  echo "Installing missing apt packages: ${packages_to_install[*]}"
+  sudo apt-get update
+  sudo apt-get install -y "${packages_to_install[@]}"
+else
+  echo "All apt packages are already installed. Skipping."
+fi
+
+{{- end }}
