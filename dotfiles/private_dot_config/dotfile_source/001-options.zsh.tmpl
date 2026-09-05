@@ -1,0 +1,25 @@
+# Keybindings
+bindkey '^p' history-search-backward
+bindkey '^n' history-search-forward
+bindkey "^[[1;5C" forward-word
+bindkey "^[[1;5D" backward-word
+
+# History
+HISTFILE={{ .xdgStateDir }}/zsh/history
+HISTSIZE=100000
+SAVEHIST=${HISTSIZE}
+
+setopt appendhistory
+setopt hist_ignore_space
+
+# Completion styling
+# Match case-insensitively
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
+# Apply `ls` colors to completions
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+
+
+# ------ Register completions --------
+
+eval "$(mise activate zsh)"
+source <(fzf --zsh)

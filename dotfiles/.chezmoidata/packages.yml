@@ -3,6 +3,7 @@ packages:
     apt:
       - wget
       - git
+      - zsh
       # - curl
       # - bzip2
       # - unzip
