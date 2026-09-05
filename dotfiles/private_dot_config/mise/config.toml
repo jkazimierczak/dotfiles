@@ -1,16 +1,22 @@
 [tools]
+
+# Shell & Customization
 chezmoi = "2.72.1"
 fzf = "0.74.3"
-fx = "39.2.0"
+starship = "1.26.0"
 
+# Devops & Utils
+terraform = "1.16.1"
+sops = "3.13.3"
+lazydocker = "latest"
 git-lfs = "3.8.0"
 ripgrep = "15.2.0"
-terraform = "1.16.1"
-lazydocker = "latest"
-sops = "latest"
+fx = "39.2.0"
 
+# Python
 python = "3.14"
 uv = "0.12.10"
 
+# Node.js
 node = "24"
 pnpm = "11"
