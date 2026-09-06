@@ -6,5 +6,3 @@ error_symbol = "[❯](bold red)"
 
 [cmd_duration]
 format = "󰔛 took [$duration]($style) "
-show_notifications = true
-min_time_to_notify = 30_000
