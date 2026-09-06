@@ -37,5 +37,9 @@ bind "set completion-map-case on"       # Perform command completion in a case i
 
 # ------ Register completions --------
 
-eval "$(mise activate bash)"
-eval "$(fzf --bash)"
+has mise && eval "$(mise activate bash)"
+has fzf && eval "$(fzf --bash)"
+
+if has terraform; then
+    complete -C "$(command -v terraform)" terraform
+fi

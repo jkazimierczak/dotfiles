@@ -1,0 +1,7 @@
+# shellcheck shell=bash
+
+# Reusable functions that are used by other sourced-scripts
+
+has() {
+    command -v "$1" &>/dev/null
+}

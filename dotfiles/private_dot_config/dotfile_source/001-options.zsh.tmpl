@@ -21,5 +21,10 @@ zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 
 # ------ Register completions --------
 
-eval "$(mise activate zsh)"
-source <(fzf --zsh)
+has mise && eval "$(mise activate zsh)"
+has fzf && source <(fzf --zsh)
+
+if has terraform; then
+    autoload -U +X bashcompinit && bashcompinit
+    complete -o nospace -C "$(command -v terraform)" terraform
+fi
