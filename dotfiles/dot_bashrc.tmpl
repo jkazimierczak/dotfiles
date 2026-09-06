@@ -8,6 +8,15 @@ esac
 [ -z "$PS1" ] && return
 
 
+# Register completions
+BASH_COMP_DIR="{{ .xdgDataDir }}/bash/completions"
+if [ -d "$BASH_COMP_DIR" ]; then
+    for comp in "$BASH_COMP_DIR"/*; do
+        [ -f "$comp" ] && source "$comp"
+    done
+fi
+
+
 # Locations containing *.sh and *.bash files to be sourced to your environment
 configFileLocations=(
     "{{ .xdgConfigDir }}/dotfile_source"

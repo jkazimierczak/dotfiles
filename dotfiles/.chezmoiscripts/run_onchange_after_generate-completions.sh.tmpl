@@ -1,0 +1,46 @@
+#!/usr/bin/env bash
+
+# mise.toml hash: {{ include "private_dot_config/mise/config.toml" | sha256sum }}
+
+ZSH_COMP_DIR="{{ .xdgDataDir }}/zsh/completions"
+BASH_COMP_DIR="{{ .xdgDataDir }}/bash/completions"
+
+mkdir -p "$ZSH_COMP_DIR" "$BASH_COMP_DIR"
+
+(
+  export PATH="{{ .xdgDataDir }}/mise/shims:{{ .chezmoi.homeDir }}/.local/bin:${PATH}"
+
+  has() {
+      command -v "$1" &>/dev/null
+  }
+
+  if has chezmoi; then
+      chezmoi completion zsh > "$ZSH_COMP_DIR/_chezmoi"
+      chezmoi completion bash > "$BASH_COMP_DIR/chezmoi"
+  fi
+
+  if has uv; then
+      uv generate-shell-completion zsh > "$ZSH_COMP_DIR/_uv"
+      uv generate-shell-completion bash > "$BASH_COMP_DIR/uv"
+  fi
+
+  if has pnpm; then
+      pnpm completion zsh > "$ZSH_COMP_DIR/_pnpm"
+      pnpm completion bash > "$BASH_COMP_DIR/pnpm"
+  fi
+
+  if has starship; then
+      starship init zsh --print-full-init > "$ZSH_COMP_DIR/_starship"
+      starship init bash --print-full-init > "$BASH_COMP_DIR/starship"
+  fi
+
+  if has sops; then
+      sops completion zsh > "$ZSH_COMP_DIR/_sops"
+      sops completion bash > "$BASH_COMP_DIR/sops"
+  fi
+
+  if has rg; then
+      rg --generate complete-zsh > "$ZSH_COMP_DIR/_rg"
+      rg --generate complete-bash > "$BASH_COMP_DIR/rg"
+  fi
+)
