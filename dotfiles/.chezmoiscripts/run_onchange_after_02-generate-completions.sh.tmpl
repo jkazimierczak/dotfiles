@@ -19,6 +19,11 @@ mkdir -p "$ZSH_COMP_DIR" "$BASH_COMP_DIR"
       chezmoi completion bash > "$BASH_COMP_DIR/chezmoi"
   fi
 
+  if has mise; then
+      mise completion zsh > "$ZSH_COMP_DIR/_mise"
+      mise completion bash > "$BASH_COMP_DIR/mise"
+  fi
+
   if has uv; then
       uv generate-shell-completion zsh > "$ZSH_COMP_DIR/_uv"
       uv generate-shell-completion bash > "$BASH_COMP_DIR/uv"

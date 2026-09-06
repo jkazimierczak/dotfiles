@@ -23,6 +23,7 @@ zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 
 has mise && eval "$(mise activate zsh)"
 has fzf && source <(fzf --zsh)
+has zoxide && eval "$(zoxide init zsh)"
 
 if has terraform; then
     autoload -U +X bashcompinit && bashcompinit
