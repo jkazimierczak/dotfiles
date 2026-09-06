@@ -4,6 +4,7 @@
 chezmoi = "2.72.1"
 fzf = "0.74.3"
 starship = "1.26.0"
+vivid = "0.11.1"
 
 # Devops & Utils
 terraform = "1.16.1"
@@ -12,6 +13,8 @@ lazydocker = "latest"
 git-lfs = "3.8.0"
 ripgrep = "15.2.0"
 fx = "39.2.0"
+duf = "0.9.1"
+zoxide = "0.10.0"
 
 # Python
 python = "3.14"
