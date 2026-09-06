@@ -1,23 +1,24 @@
 #!/usr/bin/env bash
+
 # tools/ansible-latest/uv.lock hash: {{ include "tools/ansible-latest/uv.lock" | sha256sum }}
+
 
 _installOrUpdate() {
   ansible_version=$1
 
   if [[ ! -d "${HOME}/tools/${ansible_version}" ]]; then
     echo "Ansible not found, installing Ansible"
-    exit 1
   fi
 
   pushd "${HOME}/tools/${ansible_version}" &>/dev/null || exit
-  uv sync
-
-  echo "${ansible_version} installed successfully"
+  {{ .xdgDataDir }}/mise/shims/uv sync
 
   if [[ $? -ne 0 ]]; then
     echo "Failed to uv sync Ansible venv in ${ansible_version}"
     exit 1
   fi
+
+  echo "${ansible_version} installed successfully"
 
   popd &>/dev/null || exit
 }
